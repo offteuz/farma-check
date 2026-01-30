@@ -42,7 +42,7 @@ public class UsuarioControllerIT {
         UsuarioRequestDTO request = UsuarioRequestDTO.builder()
                 .nome("Maria Souza")
                 .email("maria.souza@example.com")
-                .tipoUsuario(TipoUsuario.ESTUDANTE)
+                .tipoUsuario(TipoUsuario.PACIENTE)
                 .build();
 
         mockMvc.perform(post("/api/usuarios")

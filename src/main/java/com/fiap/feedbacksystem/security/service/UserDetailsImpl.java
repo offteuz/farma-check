@@ -26,9 +26,9 @@ public class UserDetailsImpl implements UserDetails {
         if (this.usuario.getTipoUsuario().equals(TipoUsuario.ADMINISTRADOR)) {
             return List.of(
                     new SimpleGrantedAuthority("ADMINISTRADOR"),
-                    new SimpleGrantedAuthority("ESTUDANTE")
+                    new SimpleGrantedAuthority("PACIENTE")
             );
-        } else return List.of(new SimpleGrantedAuthority("ESTUDANTE"));
+        } else return List.of(new SimpleGrantedAuthority("PACIENTE"));
     }
 
     @Override

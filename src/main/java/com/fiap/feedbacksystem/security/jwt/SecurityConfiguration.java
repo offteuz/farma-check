@@ -43,9 +43,9 @@ public class SecurityConfiguration {
             "/api/aulas",
     };
 
-    // Endpoints que só podem ser acessador por usuários com permissão de "estudante"
-    public static final String [] ENDPOINTS_ESTUDANTE = {
-            "/api/test/estudante",
+    // Endpoints que só podem ser acessador por usuários com permissão de "paciente"
+    public static final String [] ENDPOINTS_PACIENTE = {
+            "/api/test/paciente",
             "/api/feedbacks",
     };
 
@@ -58,7 +58,7 @@ public class SecurityConfiguration {
                     .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
                     .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
                     .requestMatchers(ENDPOINTS_ADMINISTRADOR).hasAuthority("ADMINISTRADOR")
-                    .requestMatchers(ENDPOINTS_ESTUDANTE).hasAuthority("ESTUDANTE")
+                    .requestMatchers(ENDPOINTS_PACIENTE).hasAuthority("PACIENTE")
                     .anyRequest().denyAll())
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

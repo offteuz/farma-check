@@ -27,6 +27,7 @@ public class Usuario extends Auditoria {
     String senha;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_usuario")
     TipoUsuario tipoUsuario;
 
     public Usuario(String nome, String email, String senha, TipoUsuario tipoUsuario) {

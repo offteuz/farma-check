@@ -59,8 +59,8 @@ public class AuthController {
         return new ResponseEntity<>("Administrador(a) autenticado com sucesso", HttpStatus.OK);
     }
 
-    @GetMapping("/test/estudante")
+    @GetMapping("/test/paciente")
     public ResponseEntity<String> getNurseAuthenticationTest() {
-        return new ResponseEntity<>("Estudante autenticado com sucesso", HttpStatus.OK);
+        return new ResponseEntity<>("Paciente autenticado com sucesso", HttpStatus.OK);
     }
 }

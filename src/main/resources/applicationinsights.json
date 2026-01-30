@@ -1,7 +1,7 @@
 {
   "connectionString": "${APPLICATIONINSIGHTS_CONNECTION_STRING}",
   "role": {
-    "name": "feedbacksystem",
+    "name": "farmacheck",
     "instance": "${HOSTNAME:localhost}"
   },
   "instrumentation": {
