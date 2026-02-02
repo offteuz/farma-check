@@ -31,7 +31,7 @@
             <appender-ref ref="FILE"/>
         </root>
 
-        <logger name="com.fiap.feedbacksystem" level="DEBUG" />
+        <logger name="com.fiap.farmacheck" level="DEBUG" />
     </springProfile>
 
     <springProfile name="prod">
@@ -41,7 +41,7 @@
             <appender-ref ref="APPLICATION_INSIGHTS"/>
         </root>
 
-        <logger name="com.fiap.feedbacksystem" level="INFO" />
+        <logger name="com.fiap.farmacheck" level="INFO" />
     </springProfile>
 
     <logger name="org.springframework.web" level="INFO"/>

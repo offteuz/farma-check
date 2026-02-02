@@ -1,7 +1,7 @@
 services:
   # Serviço de Banco de Dados (PostgreSQL)
   database:
-    container_name: postgres_farmatech
+    container_name: postgres_farmacheck
     image: postgres:17
     ports:
       - '${DB_PORT}:5432'
@@ -11,12 +11,10 @@ services:
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks:
-      - farmatech-network
 
   # Interface Visual para o Banco (PGAdmin)
   pgadmin:
-    container_name: pgadmin_farmatech
+    container_name: pgadmin_farmacheck
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: ${DB_EMAIL}
@@ -25,26 +23,22 @@ services:
       - '${PGADMIN_PORT}:80'
     depends_on:
       - database
-    networks:
-      - farmatech-network
 
   # Zookeeper (Necessário para o Kafka)
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
-    container_name: zookeeper_farmatech
+    container_name: zookeeper_farmacheck
     hostname: zookeeper
     ports:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    networks:
-      - farmatech-network
 
   # Kafka (Mensageria para Notificações)
   kafka:
     image: confluentinc/cp-kafka:7.5.0
-    container_name: kafka_farmatech
+    container_name: kafka_farmacheck
     hostname: kafka
     depends_on:
       - zookeeper
@@ -57,8 +51,6 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-    networks:
-      - farmatech-network
 
   # Servidor de E-mail Fake (Para testar notificações)
   smtp-server:
@@ -69,12 +61,10 @@ services:
       - "1025:1025" # Porta SMTP
     volumes:
       - smtp_data:/var/mail
-    networks:
-      - farmatech-network
 
   # Aplicação Spring Boot
   app:
-    container_name: farmatech-api
+    container_name: farmacheck-api
     build: .
     ports:
       - "8090:8090"
@@ -94,13 +84,7 @@ services:
       - database
       - kafka
       - smtp-server
-    networks:
-      - farmatech-network
 
 volumes:
   pgdata: {}
   smtp_data: {}
-
-networks:
-  farmatech-network:
-    driver: bridge
