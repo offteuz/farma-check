@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Configuration
 public class SwaggerConfig {
-    @GetMapping()
+    @GetMapping("/")
     public void redirectSwagger(HttpServletResponse response) {
-        String url = "swagger-ui/index.html";
+        String url = "/swagger-ui/index.html";
         response.setHeader("Location", url);
         response.setStatus(302);
     }
