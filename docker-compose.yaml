@@ -62,29 +62,6 @@ services:
     volumes:
       - smtp_data:/var/mail
 
-  # Aplicação Spring Boot
-  app:
-    container_name: farmacheck-api
-    build: .
-    ports:
-      - "8090:8090"
-    environment:
-      # Sobrescreve as configs do application.properties para rodar DENTRO do Docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/${DB_NAME}
-      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
-      # Configuração de E-mail apontando para o container fake
-      - SPRING_MAIL_HOST=smtp-server
-      - SPRING_MAIL_PORT=1025
-      - SPRING_MAIL_USERNAME=""
-      - SPRING_MAIL_PASSWORD=""
-      # Configuração do Kafka interno
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092
-    depends_on:
-      - database
-      - kafka
-      - smtp-server
-
 volumes:
   pgdata: {}
   smtp_data: {}
