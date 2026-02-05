@@ -1,24 +1,29 @@
 package com.fiap.farmacheck.model.dto.usuario;
 
-import com.fiap.farmacheck.model.dto.auditoria.AuditoriaResponseDTO;
+import com.fiap.farmacheck.model.dto.unidade.UnidadeResponseDTO;
+import com.fiap.farmacheck.model.entity.Usuario;
 import com.fiap.farmacheck.model.enums.TipoUsuario;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Data
-@SuperBuilder
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString(callSuper = true)
-public class UsuarioResponseDTO extends AuditoriaResponseDTO {
+public record UsuarioResponseDTO(
 
-    private Integer id;
-    private String nome;
-    private String email;
-    private TipoUsuario tipoUsuario; // PACIENTE ou ADMINISTRADOR
+        int id,
+
+        String nome,
+
+        String email,
+
+        TipoUsuario tipoUsuario,
+
+        UnidadeResponseDTO unidade
+) {
+
+    public UsuarioResponseDTO(Usuario usuario) {
+        this(
+                usuario.getId(),
+                usuario.getNome(),
+                usuario.getEmail(),
+                usuario.getTipoUsuario(),
+                new UnidadeResponseDTO(usuario.getUnidade())
+        );
+    }
 }
