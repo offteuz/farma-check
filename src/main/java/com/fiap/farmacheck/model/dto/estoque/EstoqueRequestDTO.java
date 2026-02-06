@@ -9,7 +9,7 @@ public record EstoqueRequestDTO(
         Integer quantidade,
 
         @NotBlank(message = "A unidade é obrigatória")
-        UnidadeRequestDTO unidadeRequestDTO,
+        int idUnidade,
 
         @NotBlank(message = "O medicamento é obrigatório")
         int idMedicamento

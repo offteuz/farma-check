@@ -22,6 +22,9 @@ public record UsuarioRequestDTO(
         String senha,
 
         @NotNull(message = "O tipo de usuario é obrigatório")
-        TipoUsuario tipoUsuario // PACIENTE ou ADMINISTRADOR
+        TipoUsuario tipoUsuario, // PACIENTE ou ADMINISTRADOR
+
+        @NotNull(message = "O ID da unidade é obrigatório")
+        Integer idUnidade
 ) {
 }

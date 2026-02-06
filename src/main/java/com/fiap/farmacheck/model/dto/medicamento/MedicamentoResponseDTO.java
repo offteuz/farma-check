@@ -1,6 +1,7 @@
 package com.fiap.farmacheck.model.dto.medicamento;
 
-import com.fiap.farmacheck.model.entity.Medicamento;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fiap.farmacheck.model.dto.auditoria.AuditoriaResponseDTO;
 
 public record MedicamentoResponseDTO(
 
@@ -12,16 +13,9 @@ public record MedicamentoResponseDTO(
 
         String dosagem,
 
-        String laboratorio
-) {
+        String laboratorio,
 
-    public MedicamentoResponseDTO(Medicamento medicamento) {
-        this(
-                medicamento.getId(),
-                medicamento.getNome(),
-                medicamento.getPricipioAtivo(),
-                medicamento.getDosagem(),
-                medicamento.getLaboratorio()
-        );
-    }
+        @JsonUnwrapped
+        AuditoriaResponseDTO auditoria
+) {
 }

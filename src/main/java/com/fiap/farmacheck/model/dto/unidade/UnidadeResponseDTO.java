@@ -1,6 +1,7 @@
 package com.fiap.farmacheck.model.dto.unidade;
 
-import com.fiap.farmacheck.model.entity.Unidade;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fiap.farmacheck.model.dto.auditoria.AuditoriaResponseDTO;
 import com.fiap.farmacheck.model.enums.TipoUnidade;
 
 public record UnidadeResponseDTO(
@@ -15,17 +16,9 @@ public record UnidadeResponseDTO(
 
         String email,
 
-        TipoUnidade tipoUnidade
-) {
+        TipoUnidade tipoUnidade,
 
-    public UnidadeResponseDTO(Unidade unidade){
-        this(
-                unidade.getId(),
-                unidade.getNome(),
-                unidade.getCep(),
-                unidade.getTelefone(),
-                unidade.getEmail(),
-                unidade.getTipoUnidade()
-        );
-    }
+        @JsonUnwrapped
+        AuditoriaResponseDTO auditoria
+) {
 }

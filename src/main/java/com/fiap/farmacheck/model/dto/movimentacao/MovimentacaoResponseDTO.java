@@ -1,8 +1,9 @@
 package com.fiap.farmacheck.model.dto.movimentacao;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fiap.farmacheck.model.dto.auditoria.AuditoriaResponseDTO;
 import com.fiap.farmacheck.model.dto.estoque.EstoqueResponseDTO;
 import com.fiap.farmacheck.model.dto.usuario.UsuarioResponseDTO;
-import com.fiap.farmacheck.model.entity.Movimentacao;
 import com.fiap.farmacheck.model.enums.TipoMovimentacao;
 
 public record MovimentacaoResponseDTO(
@@ -15,16 +16,9 @@ public record MovimentacaoResponseDTO(
 
         UsuarioResponseDTO usuario,
 
-        EstoqueResponseDTO estoque
-) {
+        EstoqueResponseDTO estoque,
 
-    public MovimentacaoResponseDTO(Movimentacao movimentacao) {
-        this (
-                movimentacao.getId(),
-                movimentacao.getQuantidade(),
-                movimentacao.getTipoMovimentacao(),
-                movimentacao.getUsuario(),
-                new EstoqueResponseDTO(movimentacao.getEstoque())
-        );
-    }
+        @JsonUnwrapped
+        AuditoriaResponseDTO auditoria
+) {
 }

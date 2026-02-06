@@ -1,5 +1,6 @@
 package com.fiap.farmacheck.service;
 
+import com.fiap.farmacheck.mapper.UsuarioMapper;
 import com.fiap.farmacheck.model.dto.usuario.UsuarioRequestDTO;
 import com.fiap.farmacheck.model.entity.Usuario;
 import com.fiap.farmacheck.repository.UsuarioRepository;
@@ -15,10 +16,14 @@ public class AuthService implements UserDetailsService {
 
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UsuarioMapper usuarioMapper;
 
-    public AuthService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(UsuarioRepository usuarioRepository,
+                       PasswordEncoder passwordEncoder,
+                       UsuarioMapper usuarioMapper) {
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
+        this.usuarioMapper = usuarioMapper;
     }
 
     @Override
@@ -29,13 +34,14 @@ public class AuthService implements UserDetailsService {
     }
 
     public Usuario registerUser(UsuarioRequestDTO dto) {
-        if (this.usuarioRepository.existsByEmail(dto.getEmail())) {
+        if (this.usuarioRepository.existsByEmail(dto.email())) {
             throw new RuntimeException("Email já cadastrado.");
         }
 
-        String encryptedPassword = passwordEncoder.encode(dto.getSenha());
+        Usuario newUser = usuarioMapper.toEntity(dto);
 
-        Usuario newUser = new Usuario(dto.getNome(), dto.getEmail(), encryptedPassword, dto.getTipoUsuario());
+        String encryptedPassword = passwordEncoder.encode(dto.senha());
+        newUser.setSenha(encryptedPassword);
 
         return this.usuarioRepository.save(newUser);
     }
