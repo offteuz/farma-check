@@ -7,6 +7,8 @@ import com.fiap.farmacheck.service.EmailService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +52,7 @@ public class MedicamentoReprocessamentoScheduler {
         props.put("value.deserializer", JsonDeserializer.class.getName());
         props.put("spring.json.trusted.packages", "com.fiap.farmacheck.model.dto.disponibilidade");
         props.put("auto.offset.reset", "earliest");
-        props.put("enable.auto.commit", "true");
+        props.put("enable.auto.commit", "false");
 
         try (KafkaConsumer<String, MedicamentoIndisponivelEvent> consumer =
                      new KafkaConsumer<>(props)) {
@@ -69,20 +71,38 @@ public class MedicamentoReprocessamentoScheduler {
                 MedicamentoIndisponivelEvent event = record.value();
                 logger.info("Reprocessando medicamento: {}", event.getNomeMedicamento());
 
-                List<Estoque> estoques = estoqueRepository
-                        .findByMedicamentoNomeIgnoreCaseAndQuantidadeGreaterThan(event.getNomeMedicamento(), 0);
+                try {
+                    List<Estoque> estoques = estoqueRepository
+                            .findByMedicamentoNomeIgnoreCaseAndQuantidadeGreaterThan(
+                                    event.getNomeMedicamento(), 0);
 
-                if (!estoques.isEmpty()) {
-                    logger.info("Medicamento '{}' agora DISPONIVEL! Enviando email para: {}",
-                            event.getNomeMedicamento(), event.getEmailUsuario());
-                    emailService.enviarNotificacaoDisponibilidade(
-                            event.getEmailUsuario(),
-                            event.getNomeUsuario(),
-                            event.getNomeMedicamento()
-                    );
-                } else {
-                    logger.info("Medicamento '{}' continua INDISPONIVEL. Pesquisa de: {} ({})",
-                            event.getNomeMedicamento(), event.getNomeUsuario(), event.getEmailUsuario());
+                    if (!estoques.isEmpty()) {
+                        logger.info("Medicamento '{}' agora DISPONIVEL! Enviando email para: {}",
+                                event.getNomeMedicamento(), event.getEmailUsuario());
+
+                        // Tenta enviar o email
+                        emailService.enviarNotificacaoDisponibilidade(
+                                event.getEmailUsuario(),
+                                event.getNomeUsuario(),
+                                event.getNomeMedicamento()
+                        );
+
+                        // SOMENTE se o email foi enviado com sucesso, faz commit
+                        consumer.commitSync(Collections.singletonMap(
+                                new TopicPartition(record.topic(), record.partition()),
+                                new OffsetAndMetadata(record.offset() + 1)
+                        ));
+
+                        logger.info("Email enviado com sucesso. Medicamento removido da fila.");
+                    } else {
+                        // Medicamento continua indisponível - NÃO faz commit
+                        logger.info("Medicamento '{}' continua INDISPONIVEL. Permanecerá na fila.",
+                                event.getNomeMedicamento());
+                    }
+                } catch (Exception e) {
+                    // Qualquer erro - NÃO faz commit, mantém na fila
+                    logger.error("Erro ao processar medicamento '{}'. Permanecerá na fila para reprocessamento. Erro: {}",
+                            event.getNomeMedicamento(), e.getMessage(), e);
                 }
             }
 
