@@ -13,7 +13,7 @@ public record MedicamentoRequestDTO(
         @NotBlank(message = "A dosagem é obrigatória")
         String dosagem,
 
-        @NotBlank(message = "O laboratório é obrigatório")
+        @NotBlank(message = "O laboratorio é obrigatório")
         String laboratorio
 ) {
 }

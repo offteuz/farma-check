@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "estoque")
 public class Estoque extends Auditoria {
 
     @Id
@@ -20,7 +21,7 @@ public class Estoque extends Auditoria {
 
     Integer quantidade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "unidade_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_estoque_unidade"))
     Unidade unidade;
 
