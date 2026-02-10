@@ -32,9 +32,9 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
         return path.startsWith("/v3/api-docs") ||
-               path.startsWith("/swagger-ui") ||
-               path.startsWith("/swagger-resources") ||
-               path.startsWith("/webjars");
+                path.startsWith("/swagger-ui") ||
+                path.startsWith("/swagger-resources") ||
+                path.startsWith("/webjars");
     }
 
     @Override
@@ -57,7 +57,6 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         }
-
         filterChain.doFilter(request, response);
     }
 
