@@ -23,7 +23,7 @@ public class SecurityConfiguration {
     }
 
     // Endpoints que não requerem autenticação para serem acessados
-    public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
+    public static final String[] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
             "/",
             "/api/auth/sign-in",
             "/api/auth/sign-up",
@@ -36,33 +36,27 @@ public class SecurityConfiguration {
     };
 
     // Endpoints que requerem autenticação para serem acessados
-    public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
+    public static final String[] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
             "/api/test",
-            "/api/disponibilidade",
-            "/api/estoques",
-            "/api/estoques/{id}",
-            "/api/unidades",
-            "/api/unidades/{id}",
-            "/api/movimentacoes",
-            "/api/movimentacoes/{id}",
     };
 
     // Endpoints que só podem ser acessador por usuários com permissão de "administrador(a)"
-    public static final String [] ENDPOINTS_ADMINISTRADOR = {
+    public static final String[] ENDPOINTS_ADMINISTRADOR = {
             "/api/test/administrador",
             "/api/medicamentos",
-            "/api/medicamentos/{id}",
             "/api/estoques",
-            "/api/estoques/{id}",
             "/api/unidades",
-            "/api/unidades/{id}",
             "/api/movimentacoes",
-            "/api/movimentacoes/{id}",
     };
 
     // Endpoints que só podem ser acessador por usuários com permissão de "paciente"
-    public static final String [] ENDPOINTS_PACIENTE = {
+    public static final String[] ENDPOINTS_PACIENTE = {
             "/api/test/paciente",
+            "/api/disponibilidade",
+            "/api/medicamentos/{id}",
+            "/api/estoques/{id}",
+            "/api/unidades/{id}",
+            "/api/movimentacoes/{id}",
     };
 
     @Bean
@@ -71,11 +65,11 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
-                    .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
-                    .requestMatchers(ENDPOINTS_ADMINISTRADOR).hasAuthority("ADMINISTRADOR")
-                    .requestMatchers(ENDPOINTS_PACIENTE).hasAuthority("PACIENTE")
-                    .anyRequest().authenticated())
+                        .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
+                        .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
+                        .requestMatchers(ENDPOINTS_ADMINISTRADOR).hasAuthority("ADMINISTRADOR")
+                        .requestMatchers(ENDPOINTS_PACIENTE).hasAuthority("PACIENTE")
+                        .anyRequest().authenticated())
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
