@@ -1,4 +1,4 @@
-# 📊 Feedback System – Azure Functions
+# 📊 Farma Check System – Azure Functions
 Sistema de processamento e análise de feedbacks acadêmicos utilizando Azure Functions, MySQL em nuvem e arquitetura serverless.
 O projeto realiza coleta, consolidação, análise semanal e notificação automática de feedbacks críticos.
 
