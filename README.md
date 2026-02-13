@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 # 📊 Farma Check System – Azure Functions
 Sistema de processamento e análise de feedbacks acadêmicos utilizando Azure Functions, MySQL em nuvem e arquitetura serverless.
 O projeto realiza coleta, consolidação, análise semanal e notificação automática de feedbacks críticos.
-=======
+
 # FarmaCheck - API de Gestao de Medicamentos em Farmacias Publicas
->>>>>>> feature/1770445459-kafka-integration
 
 Sistema para verificacao de disponibilidade de medicamentos em farmacias publicas, com notificacao automatica via Kafka e email quando medicamentos indisponiveis ficam disponiveis.
 
