@@ -478,6 +478,37 @@ A aplicacao inicia na porta **8090**.
 
 ---
 
+## 🔐 Credenciais de Acesso (Seed Data)
+
+Ao iniciar a aplicação pela primeira vez, o **Flyway** executa a migração `V2` que popula o banco de dados com um usuário administrador padrão para testes.
+
+Use as seguintes credenciais para obter o Token JWT ou logar no sistema:
+
+| Perfil | E-mail | Senha |
+| :--- | :--- | :--- |
+| **Administrador** | `admin@farmacheck.com` | `12345` |
+
+> **Nota:** A senha é armazenada no banco com hash **BCrypt**.
+
+---
+
+### 🗄️ Acesso ao Banco de Dados (PgAdmin)
+
+Se você subiu o ambiente via Docker Compose, pode acessar o painel visual do banco:
+
+- **URL:** [http://localhost:5050](http://localhost:5050)
+- **Login PgAdmin:** `admin@farmacheck.com`
+- **Senha PgAdmin:** `admin`
+
+**Para conectar no server (dentro do PgAdmin):**
+- **Host name/address:** `database` (nome do serviço no docker-compose)
+- **Port:** `5432`
+- **Maintenance database:** `farmadb`
+- **Username:** `admin`
+- **Password:** `admin`
+
+---
+
 ## Exemplo de Uso Completo
 
 ### 1. Registrar um administrador
