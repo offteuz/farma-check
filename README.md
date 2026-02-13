@@ -478,17 +478,27 @@ A aplicacao inicia na porta **8090**.
 
 ---
 
-## 🔐 Credenciais de Acesso (Seed Data)
+## 🚀 Massa de Dados Inicial (Seed Data)
 
-Ao iniciar a aplicação pela primeira vez, o **Flyway** executa a migração `V2` que popula o banco de dados com um usuário administrador padrão para testes.
+Para facilitar os testes, o projeto utiliza o **Flyway** para popular o banco de dados automaticamente na primeira inicialização (Migrations `V2` & `V3`).
 
-Use as seguintes credenciais para obter o Token JWT ou logar no sistema:
+Você não precisa cadastrar nada manualmente. Utilize as credenciais abaixo para realizar o login e testar os endpoints:
+
+### 👤 Acesso Administrativo
+Use este usuário para gerar o Token JWT ou logar na aplicação:
 
 | Perfil | E-mail | Senha |
 | :--- | :--- | :--- |
 | **Administrador** | `admin@farmacheck.com` | `12345` |
 
 > **Nota:** A senha é armazenada no banco com hash **BCrypt**.
+
+### 🏥 Dados Pré-Carregados
+Além do usuário, o sistema já inicia com os seguintes registros vinculados:
+* **Unidade:** UBS Vila Mariana (ID 1)
+* **Medicamento:** Paracetamol 500mg (ID 1)
+* **Estoque Inicial:** 100 unidades
+* **Movimentação:** Registro histórico da entrada inicial
 
 ---
 
