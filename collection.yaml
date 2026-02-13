@@ -1,0 +1,389 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1748314084836
+  modified: 1748314084836
+collection:
+  - name: Chapecos
+    meta:
+      id: fld_0a41df4155c9434d9b73bef8e292e5ee
+      created: 1748319594574
+      modified: 1748319594574
+      sortKey: -1748319590880
+    children:
+      - name: Auth
+        meta:
+          id: fld_53826095aa0f46719e1e2f3d1a6ddb65
+          created: 1748319594592
+          modified: 1748319594592
+          sortKey: -1748319590879
+      - name: Controller
+        meta:
+          id: fld_553e4aaf87074c85881921aba7d11325
+          created: 1748319594606
+          modified: 1748319594606
+          sortKey: -1748319590876
+  - name: techhealth
+    meta:
+      id: fld_7483d48187d443c0a63bec2e1ee521d4
+      created: 1756055058475
+      modified: 1756055058475
+      sortKey: -1756055058475
+  - name: FeedBack-System
+    meta:
+      id: fld_ada2853d810046e5934b6e243acdd0d8
+      created: 1762127175209
+      modified: 1770419835717
+      sortKey: -1768298480529.5
+  - name: Farma-check
+    meta:
+      id: fld_f1e444cf24af4a93af9598e06b00a4a8
+      created: 1770442110357
+      modified: 1770442110357
+      sortKey: -1770442110357
+    children:
+      - name: Estoques
+        meta:
+          id: fld_036e22ee5b364a04a97b232439773415
+          created: 1770442123673
+          modified: 1770443396823
+          sortKey: -1770442123673
+        children:
+          - url: localhost:8090/api/estoques
+            name: Cadastrar
+            meta:
+              id: req_c34cbaa0393a4802bb4a8929daa52c82
+              created: 1770441797223
+              modified: 1770450240232
+              isPrivate: false
+              sortKey: -1770442135637
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "quantidade": 1,
+                  "idUnidade": 4,
+                  "idMedicamento": 14
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            authentication:
+              type: bearer
+              token: "{% response 'body', 'req_f4cd842854574e21a4af0c9fdcddc6d9',
+                'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8090/api/estoques
+            name: Listar
+            meta:
+              id: req_4c3d7c1006b44c2c93267641d0b559ec
+              created: 1770442255365
+              modified: 1770442255365
+              isPrivate: false
+              sortKey: -1770442135687
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            authentication:
+              type: bearer
+              token: "{% response 'body', 'req_f4cd842854574e21a4af0c9fdcddc6d9',
+                'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Unidades
+        meta:
+          id: fld_47e32597420b438faba2a5f24bc75a00
+          created: 1770442213285
+          modified: 1770443390509
+          sortKey: -1770442213285
+        children:
+          - url: http://localhost:8090/api/unidades
+            name: Listar
+            meta:
+              id: req_193eb34034da44cf9d47bc1e97571ecb
+              created: 1770441731991
+              modified: 1770443198368
+              isPrivate: false
+              sortKey: -1770443195518
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.1.0
+            authentication:
+              type: bearer
+              token: "{% response 'body', 'req_f4cd842854574e21a4af0c9fdcddc6d9',
+                'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: localhost:8090/api/unidades
+            name: Cadastrar
+            meta:
+              id: req_9d5bde9f6964499baef2978e88ae6719
+              created: 1770442240488
+              modified: 1770443195733
+              isPrivate: false
+              sortKey: -1770443195418
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "nome": "vila teste",
+                  "cep": "05144-090",
+                  "telefone": "11-99999999",
+                  "email": "teste@teste.com",
+                  "tipoUnidade": "UBS"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            authentication:
+              type: bearer
+              token: "{% response 'body', 'req_f4cd842854574e21a4af0c9fdcddc6d9',
+                'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Medicamentos
+        meta:
+          id: fld_c30d4448d06e41fea44b1d8bbe4e4a87
+          created: 1770443224910
+          modified: 1770443224910
+          sortKey: -1770443224910
+        children:
+          - url: localhost:8090/api/medicamentos
+            name: Cadastro Medicamento
+            meta:
+              id: req_ced3c170faf44da6ab63fd0ed9d2eb20
+              created: 1770419168316
+              modified: 1770450417588
+              isPrivate: false
+              sortKey: -1770443235484
+            method: POST
+            body:
+              mimeType: application/json
+              text: |
+                {
+                  "nome": "Dorflex",
+                  "descricao": "",
+                  "laboratorio": "",
+                  "pricipioAtivo": "",
+                  "dosagem": ""
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            authentication:
+              type: bearer
+              token: "{% response 'body', 'req_f4cd842854574e21a4af0c9fdcddc6d9',
+                'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+              disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: localhost:8090/api/medicamentos
+            name: Lista Medicamentos
+            meta:
+              id: req_14840d52e51c46918ec0ba383f02f894
+              created: 1770441976640
+              modified: 1770450206387
+              isPrivate: false
+              sortKey: -1770443235584
+            method: GET
+            body:
+              mimeType: application/json
+              text: >
+                {
+                  "nome": "Dorflex",
+                  "descricao": "Analgésico e relaxante muscular indicado para alívio da dor associada a contraturas musculares, incluindo dor de cabeça tensional",
+                  "laboratorio": "Sanofi Medley",
+                  "principioAtivo": "Dipirona monoidratada + Citrato de orfenadrina + Cafeína anidra",
+                  "dosagem": "300mg + 35mg + 50mg (por comprimido)"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            authentication:
+              type: bearer
+              token: "{% response 'body', 'req_f4cd842854574e21a4af0c9fdcddc6d9',
+                'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+              disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Disponibilidade
+        meta:
+          id: fld_18aee093526745e785df781fbbcec92c
+          created: 1770443307265
+          modified: 1770443307265
+          sortKey: -1770443307265
+        children:
+          - url: localhost:8090/api/disponibilidade
+            name: Verificar Disponibilidade
+            meta:
+              id: req_74e1562c7a174e3d9d319845b2458f4d
+              created: 1770356427864
+              modified: 1770449224776
+              isPrivate: false
+              sortKey: -1770443317747
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"nomeMedicamento":"Dorflex"
+                }
+            parameters:
+              - id: pair_9e7cf5dece2c47ce985e88fc47885d7b
+                disabled: false
+            headers:
+              - name: Content-Type
+                value: application/json
+                id: pair_548efa4f7e47458fbc2e90fd783d0382
+              - name: User-Agent
+                value: insomnia/11.1.0
+                id: pair_39b9d7a0c23b4ad8b0b02aa489b892e9
+            authentication:
+              type: bearer
+              token: "{% response 'body', 'req_f4cd842854574e21a4af0c9fdcddc6d9',
+                'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+              disabled: false
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Login
+        meta:
+          id: fld_6c9535097b8648ed8b14c914cac61170
+          created: 1770443377979
+          modified: 1770443377979
+          sortKey: -1770443377979
+        children:
+          - url: localhost:8090/api/auth/sign-in
+            name: Logar
+            meta:
+              id: req_f4cd842854574e21a4af0c9fdcddc6d9
+              created: 1770353547959
+              modified: 1770443437877
+              isPrivate: false
+              sortKey: -1770443410523
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"email": "francisco.souza@gmail.com",
+                	"senha":"12345"	
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            authentication:
+              type: bearer
+              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUZWNoSGVhbHRoIEFQSSIsImlhdCI6MTc3MDM1NTcxNSwiZXhwIjoxNzcwMzYyOTE1LCJzdWIiOiJmcmFuY2lzY28uc291emFAZ21haWwuY29tIn0.hHhsfUOxat09dTzy9_47Ss8CKVdrehoybaNBVPPcpCA
+              disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: localhost:8090/api/auth/sign-up
+            name: Criar
+            meta:
+              id: req_5678ffb86ff34c71a5c065dc44b36900
+              created: 1770355623381
+              modified: 1770443414922
+              isPrivate: false
+              sortKey: -1770443410423
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"nome":"Francisco",
+                	 "email": "francisco@gmail.com",
+                	"senha":"12345",
+                	"tipoUsuario":"ADMINISTRADOR",
+                	"idUnidade":4
+                	
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1748314101429
+    modified: 1748314101429
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1748314100779
+    modified: 1748314100779
+    isPrivate: false
