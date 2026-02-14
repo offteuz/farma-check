@@ -47,6 +47,11 @@ public class SecurityConfiguration {
             "/api/estoques",
             "/api/unidades",
             "/api/movimentacoes",
+            "/api/disponibilidade",
+            "/api/medicamentos/{id}",
+            "/api/estoques/{id}",
+            "/api/unidades/{id}",
+            "/api/movimentacoes/{id}",
     };
 
     // Endpoints que só podem ser acessador por usuários com permissão de "paciente"
